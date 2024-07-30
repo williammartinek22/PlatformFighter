@@ -18,6 +18,8 @@ var do_guard = false
 var do_crouch = false
 var _is_on_floor = true
 
+var egg = preload("res://egg_projectile.tscn")
+
 @export var player_id = 1:
 	set(id):
 		player_id = id
@@ -40,8 +42,6 @@ func _apply_movement_from_input(delta):
 	elif velocity.x != 0:
 		velocity = velocity.lerp(Vector2.ZERO,throwFactor/10)
 		
-	print("OKKKKK")
-
 	if do_jump:
 		do_jump = false
 		if is_on_floor():
@@ -100,15 +100,32 @@ func _physics_process(delta):
 
 func attack(input_up,input_down,input_c):
 	$AudioStreamPlayer.play(0.0)
-	if input_down and not is_on_floor():
-		frame = 5
-		$Attacks/DownAttack.disabled = false
-	elif input_up:
-		frame = 6
-		$Attacks/UpAttack.disabled = false
+	if input_up:
+		if input_c:
+			frame = 7
+			$Attacks/UpPower.disabled = false
+		else:
+			frame = 6
+			$Attacks/UpAttack.disabled = false
+	elif input_down:
+		if input_c:
+			frame = 9
+			$Attacks/DownPower.disabled = false
+		elif not is_on_floor():
+			frame = 5
+			$Attacks/DownAttack.disabled = false
 	else:
-		frame = 3
-		$Attacks/Neutral.disabled = false
+		print("ATTACKA")
+		if input_c:
+			print("SHOOT EGG")
+			var eggInst = egg.instantiate()
+			get_tree().root.add_child(eggInst)
+			eggInst.direction = transform.x.x
+			eggInst.position = Vector2(position.x + (20 * eggInst.direction), position.y)
+		else:
+			frame = 3
+			$Attacks/Neutral.disabled = false
+	
 	await get_tree().create_timer(0.5).timeout 
 	frame = 0
 	#disable any hitboxes

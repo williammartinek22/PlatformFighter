@@ -21,8 +21,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		jump.rpc()
 		
-	if Input.is_action_just_pressed("Z") and player.get_node("Attacks/Neutral").disabled == true:
-		attack.rpc(Input.is_action_pressed("ui_down"),Input.is_action_pressed("ui_up"))
+	if (Input.is_action_just_pressed("Z") or Input.is_action_pressed("C")) and player.get_node("Attacks/Neutral").disabled == true:
+		attack.rpc(Input.is_action_pressed("ui_down"),Input.is_action_pressed("ui_up"),Input.is_action_pressed("C"))
 		
 	if Input.is_action_just_pressed("X"):
 		guard.rpc()
@@ -38,9 +38,9 @@ func jump():
 		player.do_jump = true
 		
 @rpc("call_local")
-func attack(attack_down,attack_up):
+func attack(attack_down,attack_up,attack_c):
 	if multiplayer.is_server():
-		player.attack(attack_up,attack_down,false)
+		player.attack(attack_up,attack_down,attack_c)
 
 @rpc("call_local")
 func crouch():
