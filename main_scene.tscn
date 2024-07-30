@@ -1,0 +1,114 @@
+[gd_scene load_steps=13 format=3 uid="uid://qepsftoqt3mq"]
+
+[ext_resource type="Script" path="res://main_scene.gd" id="1_0jmpr"]
+[ext_resource type="PackedScene" uid="uid://boyyfy3exqfsj" path="res://platform.tscn" id="1_keeih"]
+[ext_resource type="PackedScene" uid="uid://fr7q3plmr52c" path="res://eggGuy.tscn" id="2_kkstu"]
+[ext_resource type="PackedScene" uid="uid://d2fkmsu23v0ce" path="res://Multiplayer/multiplayer_hud.tscn" id="5_swdy0"]
+[ext_resource type="AudioStream" uid="uid://lxqe8bn32p7y" path="res://nature-ambiance.mp3" id="6_flc2a"]
+
+[sub_resource type="Gradient" id="Gradient_ijqgd"]
+colors = PackedColorArray(0.483338, 0.649368, 1, 1, 0.766829, 0.400239, 0.344765, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wpoh2"]
+gradient = SubResource("Gradient_ijqgd")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fefu"]
+size = Vector2(25, 677)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dttv"]
+size = Vector2(1189.5, 30.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vh2dv"]
+size = Vector2(1189.5, 111.25)
+
+[sub_resource type="Gradient" id="Gradient_lrbuq"]
+colors = PackedColorArray(0, 0.631373, 0, 1, 0.384314, 1, 0.384314, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1cn5h"]
+gradient = SubResource("Gradient_lrbuq")
+width = 440
+height = 32
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_0jmpr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(577, 325)
+scale = Vector2(18.0313, 10.1563)
+texture = SubResource("GradientTexture2D_wpoh2")
+
+[node name="Platform" parent="." instance=ExtResource("1_keeih")]
+position = Vector2(285, 399)
+scale = Vector2(0.679999, 1)
+
+[node name="Platform2" parent="." instance=ExtResource("1_keeih")]
+position = Vector2(567, 606)
+scale = Vector2(2.28, 1)
+
+[node name="Platform3" parent="." instance=ExtResource("1_keeih")]
+position = Vector2(815, 402)
+scale = Vector2(0.720002, 1)
+
+[node name="EggGuy" parent="." node_paths=PackedStringArray("healthBar") instance=ExtResource("2_kkstu")]
+position = Vector2(227, 255)
+healthBar = NodePath("../Health1/ProgressBar")
+
+[node name="BallWalls" type="Area2D" parent="."]
+position = Vector2(-116, -156)
+scale = Vector2(1.23041, 1.38543)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallWalls"]
+position = Vector2(-30, 324)
+shape = SubResource("RectangleShape2D_0fefu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BallWalls"]
+position = Vector2(1179, 328)
+shape = SubResource("RectangleShape2D_0fefu")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="BallWalls"]
+position = Vector2(569.75, -30.25)
+shape = SubResource("RectangleShape2D_3dttv")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="BallWalls"]
+position = Vector2(576, 634.625)
+shape = SubResource("RectangleShape2D_vh2dv")
+
+[node name="Health1" type="Node2D" parent="."]
+
+[node name="ProgressBar" type="TextureProgressBar" parent="Health1"]
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 458.0
+offset_bottom = 82.0
+value = 100.0
+texture_progress = SubResource("GradientTexture2D_1cn5h")
+
+[node name="Health2" type="Node2D" parent="."]
+position = Vector2(1154, 0)
+scale = Vector2(-1, 1)
+
+[node name="ProgressBar" type="TextureProgressBar" parent="Health2"]
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 458.0
+offset_bottom = 82.0
+value = 100.0
+texture_progress = SubResource("GradientTexture2D_1cn5h")
+
+[node name="MultiplayerHUD" parent="." instance=ExtResource("5_swdy0")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Multiplayer/multiplayer_player.tscn")
+spawn_path = NodePath("../Players")
+spawn_limit = 2
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_flc2a")
+
+[connection signal="body_entered" from="BallWalls" to="." method="_on_ball_walls_body_entered"]

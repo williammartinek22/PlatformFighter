@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://boyyfy3exqfsj"]
+
+[ext_resource type="Texture2D" uid="uid://dvg6fey7dpjfx" path="res://ShittyPlatform.png" id="1_o17ok"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdftt"]
+size = Vector2(494, 62)
+
+[node name="Platform" type="StaticBody2D"]
+collision_layer = 16
+
+[node name="ShittyPlatform" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_o17ok")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 6)
+shape = SubResource("RectangleShape2D_rdftt")
+one_way_collision = true

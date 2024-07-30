@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://fr7q3plmr52c"]
+
+[ext_resource type="Script" path="res://eggGuy.gd" id="1_0lhu0"]
+[ext_resource type="Texture2D" uid="uid://cowfwhfb6a22k" path="res://eggGuySpriteSheet.png" id="1_7ol2s"]
+[ext_resource type="AudioStream" uid="uid://btx1d8lbuis1t" path="res://punch.mp3" id="3_qxpwd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a48lb"]
+radius = 25.0
+height = 78.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bdt7y"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1duxc"]
+radius = 20.025
+
+[node name="EggGuy" type="CharacterBody2D"]
+collision_mask = 16
+script = ExtResource("1_0lhu0")
+
+[node name="EggGuySpriteSheet" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-2, 0)
+texture = ExtResource("1_7ol2s")
+hframes = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_a48lb")
+
+[node name="Attack" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="AttackCollision" type="CollisionShape2D" parent="Attack"]
+position = Vector2(44, 5)
+shape = SubResource("CircleShape2D_bdt7y")
+disabled = true
+
+[node name="DownAttack" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="AttackCollision" type="CollisionShape2D" parent="DownAttack"]
+position = Vector2(12, 44)
+shape = SubResource("CircleShape2D_bdt7y")
+disabled = true
+
+[node name="UpAttack" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="AttackCollision" type="CollisionShape2D" parent="UpAttack"]
+position = Vector2(-1, -41)
+shape = SubResource("CircleShape2D_1duxc")
+disabled = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qxpwd")
+
+[connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
+[connection signal="body_entered" from="DownAttack" to="." method="_on_attack_body_entered"]
+[connection signal="body_entered" from="UpAttack" to="." method="_on_attack_body_entered"]

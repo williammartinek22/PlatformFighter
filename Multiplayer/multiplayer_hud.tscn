@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2fkmsu23v0ce"]
+
+[ext_resource type="Script" path="res://GameManager.gd" id="1_4mu4v"]
+
+[node name="MultiplayerHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4mu4v")
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 646.0
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 310.0
+offset_top = 247.0
+offset_right = 310.0
+offset_bottom = 247.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 572.0
+offset_bottom = 299.0
+
+[node name="Host" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "HOST A GAME"
+
+[node name="Join" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "JOIN AS PLAYER 2"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Host" to="." method="become_host"]
+[connection signal="pressed" from="Panel/VBoxContainer/Join" to="." method="join_as_player_2"]

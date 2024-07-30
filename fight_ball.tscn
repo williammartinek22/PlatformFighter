@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://e3tvr5g4ny7c"]
+
+[ext_resource type="Script" path="res://fight_ball.gd" id="1_sgbfg"]
+[ext_resource type="Texture2D" uid="uid://bnok6sl3gyj03" path="res://fightBall.png" id="1_wmfco"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6jhyr"]
+radius = 67.0075
+
+[node name="FightBall" type="CharacterBody2D"]
+collision_mask = 19
+script = ExtResource("1_sgbfg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wmfco")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6jhyr")

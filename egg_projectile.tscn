@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://kho127c65bte"]
+
+[ext_resource type="Script" path="res://EggProjectile.gd" id="1_u50iu"]
+[ext_resource type="Texture2D" uid="uid://cowfwhfb6a22k" path="res://eggGuySpriteSheet.png" id="2_arkd3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sc7bn"]
+radius = 11.9999
+height = 32.0073
+
+[node name="EggProjectile" type="Area2D"]
+script = ExtResource("1_u50iu")
+
+[node name="EggGuySpriteSheet" type="Sprite2D" parent="."]
+texture = ExtResource("2_arkd3")
+hframes = 11
+frame = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+rotation = 1.56702
+shape = SubResource("CapsuleShape2D_sc7bn")
