@@ -118,10 +118,10 @@ func attack(input_up,input_down,input_c):
 		print("ATTACKA")
 		if input_c:
 			print("SHOOT EGG")
-			var eggInst = egg.instantiate()
-			get_tree().root.add_child(eggInst)
-			eggInst.direction = transform.x.x
-			eggInst.position = Vector2(position.x + (20 * eggInst.direction), position.y)
+			#var eggInst = egg.instantiate()
+			#get_tree().root.add_child(eggInst)
+			#eggInst.direction = transform.x.x
+			#eggInst.position = Vector2(position.x + (20 * eggInst.direction), position.y)
 		else:
 			frame = 3
 			$Attacks/Neutral.disabled = false
@@ -149,7 +149,6 @@ func _on_attack_body_entered(body):
 		body.velocity += (direction * -100.0)
 		body.sender = self
 	elif not body == self and main and $EggGuySpriteSheet.frame != 4:
-		print("OWWW AHHHHH")
 		body.take_damage(10)
 		var flingDirection = body.position.direction_to(position) * -10
 		flingDirection.x *= 250
@@ -158,10 +157,14 @@ func _on_attack_body_entered(body):
 		body.velocity = flingDirection
 
 func take_damage(amount):
+	print("Damage taken")
 	if healthBar:#main:
 		health = max(0,health-amount)	
 		healthBar.value = health
 		throwFactor = health/totalHealth
 		
 	if health == 0:
+		hide()
+		$AudioStreamPlayer2.play()
+		await $AudioStreamPlayer2.finished
 		queue_free()

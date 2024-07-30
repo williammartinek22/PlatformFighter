@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://btpb8penpr37v"]
+[gd_scene load_steps=14 format=3 uid="uid://btpb8penpr37v"]
 
 [ext_resource type="Script" path="res://Multiplayer/MultiplayerController.gd" id="1_vicjr"]
 [ext_resource type="Script" path="res://Multiplayer/MultiplayerInput.gd" id="2_cqnm7"]
 [ext_resource type="Texture2D" uid="uid://cowfwhfb6a22k" path="res://eggGuySpriteSheet.png" id="2_ho3no"]
 [ext_resource type="AudioStream" uid="uid://btx1d8lbuis1t" path="res://punch.mp3" id="4_m01n1"]
+[ext_resource type="AudioStream" uid="uid://8ow7tefteniy" path="res://EggDeath.mp3" id="5_cwlc1"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_u1qng"]
 properties/0/path = NodePath(".:player_id")
@@ -27,6 +28,9 @@ properties/5/replication_mode = 1
 properties/6/path = NodePath(".:do_guard")
 properties/6/spawn = true
 properties/6/replication_mode = 1
+properties/7/path = NodePath(".:scale")
+properties/7/spawn = true
+properties/7/replication_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_m3v66"]
 properties/0/path = NodePath("InputSynchronizer:input_direction")
@@ -113,5 +117,8 @@ disabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_m01n1")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_cwlc1")
 
 [connection signal="body_entered" from="Attacks" to="." method="_on_attack_body_entered"]

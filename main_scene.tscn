@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://qepsftoqt3mq"]
+[gd_scene load_steps=14 format=3 uid="uid://qepsftoqt3mq"]
 
 [ext_resource type="Script" path="res://main_scene.gd" id="1_0jmpr"]
 [ext_resource type="PackedScene" uid="uid://boyyfy3exqfsj" path="res://platform.tscn" id="1_keeih"]
@@ -23,6 +23,14 @@ size = Vector2(1189.5, 30.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vh2dv"]
 size = Vector2(1189.5, 111.25)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_p0n6x"]
+properties/0/path = NodePath("MultiplayerSynchronizer/Health1/ProgressBar:value")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("MultiplayerSynchronizer/Health2/ProgressBar:value")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [sub_resource type="Gradient" id="Gradient_lrbuq"]
 colors = PackedColorArray(0, 0.631373, 0, 1, 0.384314, 1, 0.384314, 1)
 
@@ -31,7 +39,7 @@ gradient = SubResource("Gradient_lrbuq")
 width = 440
 height = 32
 
-[node name="Node2D" type="Node2D"]
+[node name="MainScene" type="Node2D"]
 script = ExtResource("1_0jmpr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -53,7 +61,7 @@ scale = Vector2(0.720002, 1)
 
 [node name="EggGuy" parent="." node_paths=PackedStringArray("healthBar") instance=ExtResource("2_kkstu")]
 position = Vector2(227, 255)
-healthBar = NodePath("../Health1/ProgressBar")
+healthBar = NodePath("../MultiplayerSynchronizer/Health1/ProgressBar")
 
 [node name="BallWalls" type="Area2D" parent="."]
 position = Vector2(-116, -156)
@@ -76,28 +84,6 @@ shape = SubResource("RectangleShape2D_3dttv")
 position = Vector2(576, 634.625)
 shape = SubResource("RectangleShape2D_vh2dv")
 
-[node name="Health1" type="Node2D" parent="."]
-
-[node name="ProgressBar" type="TextureProgressBar" parent="Health1"]
-offset_left = 18.0
-offset_top = 18.0
-offset_right = 458.0
-offset_bottom = 82.0
-value = 100.0
-texture_progress = SubResource("GradientTexture2D_1cn5h")
-
-[node name="Health2" type="Node2D" parent="."]
-position = Vector2(1154, 0)
-scale = Vector2(-1, 1)
-
-[node name="ProgressBar" type="TextureProgressBar" parent="Health2"]
-offset_left = 18.0
-offset_top = 18.0
-offset_right = 458.0
-offset_bottom = 82.0
-value = 100.0
-texture_progress = SubResource("GradientTexture2D_1cn5h")
-
 [node name="MultiplayerHUD" parent="." instance=ExtResource("5_swdy0")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
@@ -110,5 +96,39 @@ spawn_limit = 2
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_flc2a")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_p0n6x")
+
+[node name="Health1" type="Node2D" parent="MultiplayerSynchronizer"]
+
+[node name="ProgressBar" type="TextureProgressBar" parent="MultiplayerSynchronizer/Health1"]
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 458.0
+offset_bottom = 82.0
+value = 100.0
+texture_progress = SubResource("GradientTexture2D_1cn5h")
+
+[node name="Health2" type="Node2D" parent="MultiplayerSynchronizer"]
+position = Vector2(1154, 0)
+rotation = -3.14159
+scale = Vector2(1, -1)
+
+[node name="ProgressBar" type="TextureProgressBar" parent="MultiplayerSynchronizer/Health2"]
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 458.0
+offset_bottom = 82.0
+value = 100.0
+texture_progress = SubResource("GradientTexture2D_1cn5h")
+
+[node name="SpawnPos" type="Node" parent="MultiplayerSynchronizer"]
+
+[node name="Spawn1" type="Node2D" parent="MultiplayerSynchronizer/SpawnPos"]
+position = Vector2(283, 296)
+
+[node name="Spawn2" type="Node2D" parent="MultiplayerSynchronizer/SpawnPos"]
+position = Vector2(818, 298)
 
 [connection signal="body_entered" from="BallWalls" to="." method="_on_ball_walls_body_entered"]

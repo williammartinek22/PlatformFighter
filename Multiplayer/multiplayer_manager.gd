@@ -6,12 +6,13 @@ const SERVER_IP = "192.168.1.220"
 var multiplayer_scene = preload("res://Multiplayer/multiplayer_player.tscn")
 
 var _players_spawn_node
-
+var _multiplayer_synchronizer
 
 func become_host():
 	print("Becoming host")
 	
 	_players_spawn_node = get_tree().get_current_scene().get_node("Players")
+	_multiplayer_synchronizer = get_tree().get_current_scene().get_node("MultiplayerSynchronizer")
 	
 	var server_peer = ENetMultiplayerPeer.new()
 	server_peer.create_server(SERVER_PORT)
@@ -44,6 +45,14 @@ func _add_player_to_game(id: int):
 	player_to_add.name = str(id)
 	
 	_players_spawn_node.add_child(player_to_add, true)
+	
+	if player_to_add.player_id == 1:
+		player_to_add.healthBar = _multiplayer_synchronizer.get_child(0).get_child(0)
+		player_to_add.position = _multiplayer_synchronizer.get_child(2).get_child(0).position
+	else:
+		player_to_add.healthBar = _multiplayer_synchronizer.get_child(1).get_child(0)
+		player_to_add.position = _multiplayer_synchronizer.get_child(2).get_child(1).position
+		player_to_add.transform.x.x = -1
 	
 	
 func _del_player(id: int):
