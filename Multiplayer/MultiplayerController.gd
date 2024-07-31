@@ -8,6 +8,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var health = 100.0
 var totalHealth = health
 @export var healthBar: TextureProgressBar
+@export var superBar: TextureProgressBar
 @export var main = true
 var throwFactor = 0.95
 
@@ -131,7 +132,8 @@ func attack(input_up,input_down,input_c):
 	#disable any hitboxes
 	var attacks = $Attacks.get_children()
 	for attack in attacks:
-		attack.disabled = true
+		if attack is CollisionShape2D:
+			attack.disabled = true
 
 func crouch():
 	if is_on_floor():
@@ -139,6 +141,23 @@ func crouch():
 	await get_tree().create_timer(0.5).timeout 
 	do_crouch  = false
 	frame = 0 
+
+func _super():
+	if superBar.value >= 100:
+		$SuperSheet.show()
+		$SuperSheet.play("default")
+		$EggGuySpriteSheet.hide()
+		await $SuperSheet.animation_finished
+		$SuperSheet.hide()
+		$Chacken.show()
+		$Attacks/ChackenCollisionPolygon2D.disabled = false
+		$AudioStreamPlayer3.play()
+		superBar.value = 0
+		await get_tree().create_timer(8.0).timeout
+		$Chacken.hide()
+		$Attacks/ChackenCollisionPolygon2D.disabled = true
+		$EggGuySpriteSheet.show() 
+		$AudioStreamPlayer3.stop()
 
 func _on_attack_body_entered(body):
 	set_deferred('$Attack/AttackCollision.disabled', true)
@@ -152,19 +171,23 @@ func _on_attack_body_entered(body):
 		body.take_damage(10)
 		var flingDirection = body.position.direction_to(position) * -10
 		flingDirection.x *= 250
-		flingDirection.y *= 500 #/throwFactor
+		#flingDirection.y *= 500 #/throwFactor
 		flingDirection.y -= 100
 		body.velocity = flingDirection
 
 func take_damage(amount):
-	print("Damage taken")
 	if healthBar:#main:
 		health = max(0,health-amount)	
 		healthBar.value = health
 		throwFactor = health/totalHealth
 		
+	if superBar:
+		var superMeter = min(100,superBar.value+(amount*2))
+		superBar.value = superMeter
+		
 	if health == 0:
-		hide()
+		frame = 11
+		set_process(false)
 		$AudioStreamPlayer2.play()
-		await $AudioStreamPlayer2.finished
-		queue_free()
+		#await get_tree().create_timer(2.0).timeout
+		#queue_free()

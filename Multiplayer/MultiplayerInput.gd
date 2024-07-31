@@ -32,6 +32,9 @@ func _process(delta):
 	elif Input.is_action_just_released("ui_down"):
 		uncrouch.rpc()
 		
+	if Input.is_action_just_pressed("S"):
+		_super.rpc()
+		
 @rpc("call_local")
 func jump():
 	if multiplayer.is_server():
@@ -56,3 +59,8 @@ func uncrouch():
 func guard():
 	if multiplayer.is_server():
 		player.do_guard = true
+		
+@rpc("call_local")
+func _super():
+	if multiplayer.is_server():
+		player._super()

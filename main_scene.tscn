@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://qepsftoqt3mq"]
+[gd_scene load_steps=16 format=3 uid="uid://qepsftoqt3mq"]
 
 [ext_resource type="Script" path="res://main_scene.gd" id="1_0jmpr"]
 [ext_resource type="PackedScene" uid="uid://boyyfy3exqfsj" path="res://platform.tscn" id="1_keeih"]
@@ -30,12 +30,26 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath("MultiplayerSynchronizer/Health2/ProgressBar:value")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath("MultiplayerSynchronizer/Super1/ProgressBar:value")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("MultiplayerSynchronizer/Super2/ProgressBar:value")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_lrbuq"]
 colors = PackedColorArray(0, 0.631373, 0, 1, 0.384314, 1, 0.384314, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_1cn5h"]
 gradient = SubResource("Gradient_lrbuq")
+width = 440
+height = 32
+
+[sub_resource type="Gradient" id="Gradient_1h143"]
+colors = PackedColorArray(0, 0.531365, 0.90159, 1, 0.486864, 1, 0.863974, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_on87v"]
+gradient = SubResource("Gradient_1h143")
 width = 440
 height = 32
 
@@ -79,6 +93,7 @@ shape = SubResource("RectangleShape2D_0fefu")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="BallWalls"]
 position = Vector2(569.75, -30.25)
 shape = SubResource("RectangleShape2D_3dttv")
+disabled = true
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="BallWalls"]
 position = Vector2(576, 634.625)
@@ -122,6 +137,29 @@ offset_right = 458.0
 offset_bottom = 82.0
 value = 100.0
 texture_progress = SubResource("GradientTexture2D_1cn5h")
+
+[node name="Super1" type="Node2D" parent="MultiplayerSynchronizer"]
+
+[node name="ProgressBar" type="TextureProgressBar" parent="MultiplayerSynchronizer/Super1"]
+offset_left = 18.0
+offset_top = 53.0
+offset_right = 458.0
+offset_bottom = 117.0
+scale = Vector2(0.75, 0.75)
+texture_progress = SubResource("GradientTexture2D_on87v")
+
+[node name="Super2" type="Node2D" parent="MultiplayerSynchronizer"]
+position = Vector2(1154, 0)
+rotation = -3.14159
+scale = Vector2(1, -1)
+
+[node name="ProgressBar" type="TextureProgressBar" parent="MultiplayerSynchronizer/Super2"]
+offset_left = 18.0
+offset_top = 53.0
+offset_right = 458.0
+offset_bottom = 117.0
+scale = Vector2(0.75, 0.75)
+texture_progress = SubResource("GradientTexture2D_on87v")
 
 [node name="SpawnPos" type="Node" parent="MultiplayerSynchronizer"]
 

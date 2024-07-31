@@ -48,12 +48,13 @@ func _add_player_to_game(id: int):
 	
 	if player_to_add.player_id == 1:
 		player_to_add.healthBar = _multiplayer_synchronizer.get_child(0).get_child(0)
-		player_to_add.position = _multiplayer_synchronizer.get_child(2).get_child(0).position
+		player_to_add.superBar = _multiplayer_synchronizer.get_child(2).get_child(0)
+		player_to_add.position = _multiplayer_synchronizer.get_child(4).get_child(0).position
 	else:
 		player_to_add.healthBar = _multiplayer_synchronizer.get_child(1).get_child(0)
-		player_to_add.position = _multiplayer_synchronizer.get_child(2).get_child(1).position
+		player_to_add.superBar = _multiplayer_synchronizer.get_child(3).get_child(0)
+		player_to_add.position = _multiplayer_synchronizer.get_child(4).get_child(1).position
 		player_to_add.transform.x.x = -1
-	
 	
 func _del_player(id: int):
 	print("Player %s left the game" % id)
