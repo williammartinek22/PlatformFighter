@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r0mknwkenf7y"
-path="res://.godot/imported/selectorSheet.png-eaabb614570098988ea36c51899ccca1.ctex"
+uid="uid://b6jovp8owbpnm"
+path="res://.godot/imported/blueSelector.png-ce81ccad7c749ec9ee7533fa42044a18.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://selectorSheet.png"
-dest_files=["res://.godot/imported/selectorSheet.png-eaabb614570098988ea36c51899ccca1.ctex"]
+source_file="res://blueSelector.png"
+dest_files=["res://.godot/imported/blueSelector.png-ce81ccad7c749ec9ee7533fa42044a18.ctex"]
 
 [params]
 

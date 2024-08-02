@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2encsuvqwqhf"]
+[gd_scene load_steps=6 format=3 uid="uid://c2encsuvqwqhf"]
 
 [ext_resource type="Script" path="res://character_select.gd" id="1_egmif"]
 [ext_resource type="Texture2D" uid="uid://0q6q6k3b1rvo" path="res://eggPortraits.png" id="1_phfg1"]
+[ext_resource type="Texture2D" uid="uid://cmkbpbsofxupu" path="res://GauzyPortrait.png" id="3_1j4ui"]
+[ext_resource type="Texture2D" uid="uid://b6jovp8owbpnm" path="res://blueSelector.png" id="4_q6tsd"]
+[ext_resource type="Texture2D" uid="uid://bpoj3dklqxnfi" path="res://redSelector.png" id="5_ixjcu"]
 
 [node name="CharacterSelect" type="Control"]
 layout_mode = 3
@@ -21,32 +24,43 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.65098, 0.65098, 0.65098, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
+[node name="GridContainer" type="GridContainer" parent="ColorRect"]
 layout_mode = 0
-offset_left = 223.0
-offset_top = 177.0
-offset_right = 597.0
-offset_bottom = 350.0
+offset_left = 192.0
+offset_top = 106.0
+offset_right = 569.0
+offset_bottom = 302.0
 scale = Vector2(2, 2)
+columns = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-
-[node name="EggMan" type="TextureButton" parent="ColorRect/HBoxContainer/VBoxContainer"]
+[node name="EggMan" type="TextureButton" parent="ColorRect/GridContainer"]
 texture_filter = 3
 layout_mode = 2
 texture_normal = ExtResource("1_phfg1")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ColorRect/HBoxContainer"]
+[node name="Gauzy" type="TextureButton" parent="ColorRect/GridContainer"]
+texture_filter = 3
 layout_mode = 2
+texture_normal = ExtResource("3_1j4ui")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
+[node name="BlueSelector" type="TextureRect" parent="ColorRect"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 192.0
+offset_top = 106.0
+offset_right = 331.0
+offset_bottom = 178.0
+texture = ExtResource("4_q6tsd")
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
+[node name="RedSelector" type="TextureRect" parent="ColorRect"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 192.0
+offset_top = 106.0
+offset_right = 331.0
+offset_bottom = 178.0
+texture = ExtResource("5_ixjcu")
 
-[node name="VBoxContainer5" type="VBoxContainer" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-
-[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer/EggMan" to="." method="_button_pressed"]
+[connection signal="pressed" from="ColorRect/GridContainer/Gauzy" to="." method="_button_pressed"]

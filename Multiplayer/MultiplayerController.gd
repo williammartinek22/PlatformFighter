@@ -40,7 +40,7 @@ func _apply_movement_from_input(delta):
 	if not is_on_floor():
 		#$EggGuySpriteSheet.frame = 2
 		velocity.y += gravity * delta
-	elif $EggGuySpriteSheet.frame == 2:
+	elif frame == 2:
 		frame = 0
 	elif velocity.x != 0:
 		velocity = velocity.lerp(Vector2.ZERO,throwFactor/10)
@@ -53,28 +53,28 @@ func _apply_movement_from_input(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	$EggGuySpriteSheet.frame = frame
+	#$EggGuySpriteSheet.frame = frame
 	
 	var direction = %InputSynchronizer.input_direction
 	if direction:
-		if $EggGuySpriteSheet.frame != 1:
+		if frame != 1:
 			velocity.x = direction * SPEED
 			transform.x.x = direction
-		elif $EggGuySpriteSheet.frame == 1:
+		elif frame == 1:
 			velocity.x = direction * SPEED/3
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	if do_crouch and is_on_floor():#$EggGuySpriteSheet.frame == 0:
-		frame = 1
-		do_crouch = false
-	if Input.is_action_just_released("ui_down"):
-		do_crouch  = false
-		frame = 0
+	#if do_crouch and is_on_floor():#$EggGuySpriteSheet.frame == 0:
+		#frame = 1
+		#do_crouch = false
+	#if Input.is_action_just_released("ui_down"):
+		#do_crouch  = false
+		#frame = 0
 
-	if do_attack:
-		attack(false,false,false)
-		do_attack = false
+	#if do_attack:
+		#attack(false,false,false)
+		#do_attack = false
 		
 	if do_guard:
 		do_guard = false
@@ -89,11 +89,11 @@ func _physics_process(delta):
 	if multiplayer.is_server():
 		_apply_movement_from_input(delta)
 	
-	$EggGuySpriteSheet.frame = frame
+	#$EggGuySpriteSheet.frame = frame
 	
 	var direction = %InputSynchronizer.input_direction
 	if direction:
-		if $EggGuySpriteSheet.frame != 1:
+		if frame != 1:
 			velocity.x = direction * SPEED
 			transform.x.x = direction
 
@@ -144,21 +144,7 @@ func crouch():
 	frame = 0 
 
 func _super():
-	if superBar.value >= 100:
-		$SuperSheet.show()
-		$SuperSheet.play("default")
-		$EggGuySpriteSheet.hide()
-		await $SuperSheet.animation_finished
-		$SuperSheet.hide()
-		$Chacken.show()
-		$Attacks/ChackenCollisionPolygon2D.disabled = false
-		$AudioStreamPlayer3.play()
-		superBar.value = 0
-		await get_tree().create_timer(8.0).timeout
-		$Chacken.hide()
-		$Attacks/ChackenCollisionPolygon2D.disabled = true
-		$EggGuySpriteSheet.show() 
-		$AudioStreamPlayer3.stop()
+	pass
 
 func _on_attack_body_entered(body):
 	set_deferred('$Attack/AttackCollision.disabled', true)
@@ -168,7 +154,7 @@ func _on_attack_body_entered(body):
 		var direction = body.position.direction_to(self.position)
 		body.velocity += (direction * -100.0)
 		body.sender = self
-	elif not body == self and main and $EggGuySpriteSheet.frame != 4:
+	elif not body == self and main and frame != 4:
 		body.take_damage(10)
 		var flingDirection = body.position.direction_to(position) * -10
 		flingDirection.x *= 250

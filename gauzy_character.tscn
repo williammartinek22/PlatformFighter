@@ -1,0 +1,197 @@
+[gd_scene load_steps=25 format=3 uid="uid://b182ueivb4l4h"]
+
+[ext_resource type="Script" path="res://gauzy_character.gd" id="1_u5k6v"]
+[ext_resource type="Script" path="res://Multiplayer/MultiplayerInput.gd" id="2_byeg4"]
+[ext_resource type="Texture2D" uid="uid://bqstdtfk2keyl" path="res://gauzySpriteSheet.png" id="3_rv78x"]
+[ext_resource type="Texture2D" uid="uid://chlpoq1tgemdi" path="res://superSheet.png" id="4_d02gi"]
+[ext_resource type="Texture2D" uid="uid://cspanq6rwsv51" path="res://CHACKEN.png" id="5_w4k1b"]
+[ext_resource type="AudioStream" uid="uid://btx1d8lbuis1t" path="res://punch.mp3" id="6_tfvee"]
+[ext_resource type="AudioStream" uid="uid://8ow7tefteniy" path="res://EggDeath.mp3" id="7_55v38"]
+[ext_resource type="AudioStream" uid="uid://dhxpkhcnixwu" path="res://Chicken.mp3" id="8_vnfha"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4jdkx"]
+properties/0/path = NodePath(".:player_id")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:do_jump")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:_is_on_floor")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:frame")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:do_crouch")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:do_guard")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath(".:transform")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_23eb2"]
+properties/0/path = NodePath("InputSynchronizer:input_direction")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vm4vs"]
+radius = 29.0
+height = 98.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cldor"]
+atlas = ExtResource("4_d02gi")
+region = Rect2(0, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tv4gh"]
+atlas = ExtResource("4_d02gi")
+region = Rect2(600, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4t1j7"]
+atlas = ExtResource("4_d02gi")
+region = Rect2(1200, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6h15x"]
+atlas = ExtResource("4_d02gi")
+region = Rect2(1800, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2x2m"]
+atlas = ExtResource("4_d02gi")
+region = Rect2(2400, 0, 600, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hspit"]
+atlas = ExtResource("4_d02gi")
+region = Rect2(3000, 0, 600, 600)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eedey"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cldor")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tv4gh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4t1j7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6h15x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2x2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hspit")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yia2v"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6u3ey"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1o16j"]
+radius = 20.025
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iyh1y"]
+size = Vector2(65, 47)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aeotp"]
+radius = 27.1662
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q3pd5"]
+radius = 16.0291
+height = 61.9336
+
+[node name="GauzyCharacter" type="CharacterBody2D"]
+collision_mask = 16
+script = ExtResource("1_u5k6v")
+
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_4jdkx")
+
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_23eb2")
+script = ExtResource("2_byeg4")
+
+[node name="GauzySpriteSheet" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, -4)
+texture = ExtResource("3_rv78x")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -2)
+shape = SubResource("CapsuleShape2D_vm4vs")
+
+[node name="SuperSheet" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-15, -216)
+sprite_frames = SubResource("SpriteFrames_eedey")
+
+[node name="Chacken" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(-19, -206)
+texture = ExtResource("5_w4k1b")
+
+[node name="Attacks" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="Neutral" type="CollisionShape2D" parent="Attacks"]
+position = Vector2(44, 5)
+shape = SubResource("CircleShape2D_yia2v")
+disabled = true
+
+[node name="DownAttack" type="CollisionShape2D" parent="Attacks"]
+position = Vector2(12, 44)
+shape = SubResource("CircleShape2D_6u3ey")
+disabled = true
+
+[node name="UpAttack" type="CollisionShape2D" parent="Attacks"]
+position = Vector2(-1, -41)
+shape = SubResource("CircleShape2D_1o16j")
+disabled = true
+
+[node name="UpPower" type="CollisionShape2D" parent="Attacks"]
+position = Vector2(-4.5, -26.5)
+shape = SubResource("RectangleShape2D_iyh1y")
+disabled = true
+
+[node name="SidePower" type="CollisionShape2D" parent="Attacks"]
+position = Vector2(37, -4)
+shape = SubResource("CircleShape2D_aeotp")
+disabled = true
+
+[node name="DownPower" type="CollisionShape2D" parent="Attacks"]
+position = Vector2(1, 41)
+rotation = -1.56128
+shape = SubResource("CapsuleShape2D_q3pd5")
+disabled = true
+
+[node name="ChackenCollisionPolygon2D" type="CollisionPolygon2D" parent="Attacks"]
+visible = false
+position = Vector2(-9, -224)
+polygon = PackedVector2Array(195, -187, 146, -138, 67, -57, -100, -55, -176, -201, -210, -139, -213, -30, -130, 39, -27, 176, -27, 270, 56, 262, 26, 167, 41, 133, 145, 103, 170, -4, 225, -116, 256, -110)
+disabled = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_tfvee")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_55v38")
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_vnfha")

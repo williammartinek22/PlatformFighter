@@ -1,10 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://btpb8penpr37v"]
+[gd_scene load_steps=14 format=3 uid="uid://btpb8penpr37v"]
 
 [ext_resource type="Script" path="res://Multiplayer/MultiplayerController.gd" id="1_vicjr"]
 [ext_resource type="Script" path="res://Multiplayer/MultiplayerInput.gd" id="2_cqnm7"]
-[ext_resource type="Texture2D" uid="uid://cowfwhfb6a22k" path="res://eggGuySpriteSheet.png" id="2_ho3no"]
-[ext_resource type="Texture2D" uid="uid://chlpoq1tgemdi" path="res://superSheet.png" id="4_7slgd"]
-[ext_resource type="Texture2D" uid="uid://cspanq6rwsv51" path="res://CHACKEN.png" id="4_gxfqc"]
 [ext_resource type="AudioStream" uid="uid://btx1d8lbuis1t" path="res://punch.mp3" id="4_m01n1"]
 [ext_resource type="AudioStream" uid="uid://8ow7tefteniy" path="res://EggDeath.mp3" id="5_cwlc1"]
 [ext_resource type="AudioStream" uid="uid://dhxpkhcnixwu" path="res://Chicken.mp3" id="7_qpvkp"]
@@ -44,56 +41,6 @@ properties/0/replication_mode = 1
 radius = 25.0
 height = 78.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cldor"]
-atlas = ExtResource("4_7slgd")
-region = Rect2(0, 0, 600, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tv4gh"]
-atlas = ExtResource("4_7slgd")
-region = Rect2(600, 0, 600, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4t1j7"]
-atlas = ExtResource("4_7slgd")
-region = Rect2(1200, 0, 600, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6h15x"]
-atlas = ExtResource("4_7slgd")
-region = Rect2(1800, 0, 600, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o2x2m"]
-atlas = ExtResource("4_7slgd")
-region = Rect2(2400, 0, 600, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hspit"]
-atlas = ExtResource("4_7slgd")
-region = Rect2(3000, 0, 600, 600)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ki4jt"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cldor")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tv4gh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4t1j7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6h15x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o2x2m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hspit")
-}],
-"loop": false,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_302sc"]
 radius = 24.0
 
@@ -123,26 +70,9 @@ unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_m3v66")
 script = ExtResource("2_cqnm7")
 
-[node name="EggGuySpriteSheet" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(-2, 0)
-texture = ExtResource("2_ho3no")
-hframes = 12
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_d7l2x")
-
-[node name="SuperSheet" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(-15, -216)
-sprite_frames = SubResource("SpriteFrames_ki4jt")
-
-[node name="Chacken" type="Sprite2D" parent="."]
-visible = false
-texture_filter = 1
-position = Vector2(-19, -206)
-texture = ExtResource("4_gxfqc")
 
 [node name="Attacks" type="Area2D" parent="."]
 collision_layer = 2

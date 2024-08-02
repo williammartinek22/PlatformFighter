@@ -102,7 +102,7 @@ shape = SubResource("RectangleShape2D_vh2dv")
 [node name="MultiplayerHUD" parent="." instance=ExtResource("5_swdy0")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://egg_guy_character.tscn", "res://Multiplayer/multiplayer_player.tscn")
+_spawnable_scenes = PackedStringArray("res://egg_guy_character.tscn", "res://Multiplayer/multiplayer_player.tscn", "res://gauzy_character.tscn")
 spawn_path = NodePath("../Players")
 spawn_limit = 2
 

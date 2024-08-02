@@ -3,7 +3,10 @@ extends Node
 const SERVER_PORT = 8081
 const SERVER_IP = "192.168.1.176"
 
-var multiplayer_scene = preload("res://egg_guy_character.tscn")
+var multiplayer_scene = preload("res://gauzy_character.tscn")
+
+var characterOne
+var characterTwo
 
 var _players_spawn_node
 var _multiplayer_synchronizer
@@ -40,9 +43,11 @@ func join_as_player_2():
 func _add_player_to_game(id: int):
 	print("Added player %s to the game" % id)
 	
-	
-	
-	var player_to_add = multiplayer_scene.instantiate()
+	var player_to_add
+	if characterOne and id == 1:
+		player_to_add = characterOne.instantiate()
+	else:
+		player_to_add = multiplayer_scene.instantiate()
 	player_to_add.player_id = id
 	player_to_add.name = str(id)
 	
