@@ -1,3 +1,4 @@
+class_name MultiplayerController
 extends CharacterBody2D
 
 
@@ -33,6 +34,7 @@ func _ready():
 		#$Camera2D.enabled = false
 		pass
 	pass#set_deferred("$EggGuySpriteSheet.frame", 4)
+	$Attacks.connect("body_entered", _on_attack_body_entered)
 
 func _apply_movement_from_input(delta):
 	if not is_on_floor():
@@ -116,13 +118,12 @@ func attack(input_up,input_down,input_c):
 			frame = 5
 			$Attacks/DownAttack.disabled = false
 	else:
-		print("ATTACKA")
 		if input_c:
-			print("SHOOT EGG")
-			#var eggInst = egg.instantiate()
-			#get_tree().root.add_child(eggInst)
-			#eggInst.direction = transform.x.x
-			#eggInst.position = Vector2(position.x + (20 * eggInst.direction), position.y)
+			var eggInst = egg.instantiate()
+			eggInst.shooter = self 
+			get_tree().root.add_child(eggInst)
+			eggInst.direction = transform.x.x
+			eggInst.position = Vector2(position.x + (20 * eggInst.direction), position.y)
 		else:
 			frame = 3
 			$Attacks/Neutral.disabled = false
@@ -189,5 +190,5 @@ func take_damage(amount):
 		frame = 11
 		set_process(false)
 		$AudioStreamPlayer2.play()
-		#await get_tree().create_timer(2.0).timeout
-		#queue_free()
+		await get_tree().create_timer(2.0).timeout
+		queue_free()

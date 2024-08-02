@@ -11,6 +11,5 @@ func _process(_delta):
 	if Input.is_action_just_released("R"):
 		get_tree().reload_current_scene()
 
-
 func _on_ball_walls_body_entered(body):
 	body.take_damage(100)

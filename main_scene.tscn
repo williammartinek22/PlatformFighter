@@ -102,7 +102,7 @@ shape = SubResource("RectangleShape2D_vh2dv")
 [node name="MultiplayerHUD" parent="." instance=ExtResource("5_swdy0")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Multiplayer/multiplayer_player.tscn")
+_spawnable_scenes = PackedStringArray("res://egg_guy_character.tscn", "res://Multiplayer/multiplayer_player.tscn")
 spawn_path = NodePath("../Players")
 spawn_limit = 2
 
@@ -168,5 +168,12 @@ position = Vector2(283, 296)
 
 [node name="Spawn2" type="Node2D" parent="MultiplayerSynchronizer/SpawnPos"]
 position = Vector2(818, 298)
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="ItemSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://throw_ball.tscn")
+spawn_path = NodePath("../Items")
+spawn_limit = 1
 
 [connection signal="body_entered" from="BallWalls" to="." method="_on_ball_walls_body_entered"]

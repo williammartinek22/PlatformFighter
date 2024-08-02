@@ -1,15 +1,15 @@
-[gd_scene load_steps=24 format=3 uid="uid://btpb8penpr37v"]
+[gd_scene load_steps=25 format=3 uid="uid://cjrjt4doo1ciw"]
 
-[ext_resource type="Script" path="res://Multiplayer/MultiplayerController.gd" id="1_vicjr"]
-[ext_resource type="Script" path="res://Multiplayer/MultiplayerInput.gd" id="2_cqnm7"]
-[ext_resource type="Texture2D" uid="uid://cowfwhfb6a22k" path="res://eggGuySpriteSheet.png" id="2_ho3no"]
-[ext_resource type="Texture2D" uid="uid://chlpoq1tgemdi" path="res://superSheet.png" id="4_7slgd"]
-[ext_resource type="Texture2D" uid="uid://cspanq6rwsv51" path="res://CHACKEN.png" id="4_gxfqc"]
-[ext_resource type="AudioStream" uid="uid://btx1d8lbuis1t" path="res://punch.mp3" id="4_m01n1"]
-[ext_resource type="AudioStream" uid="uid://8ow7tefteniy" path="res://EggDeath.mp3" id="5_cwlc1"]
-[ext_resource type="AudioStream" uid="uid://dhxpkhcnixwu" path="res://Chicken.mp3" id="7_qpvkp"]
+[ext_resource type="Script" path="res://EggGuyCharacter.gd" id="1_b25r6"]
+[ext_resource type="Script" path="res://Multiplayer/MultiplayerInput.gd" id="2_d8gke"]
+[ext_resource type="Texture2D" uid="uid://cowfwhfb6a22k" path="res://eggGuySpriteSheet.png" id="3_5h5x3"]
+[ext_resource type="Texture2D" uid="uid://chlpoq1tgemdi" path="res://superSheet.png" id="4_a2mh8"]
+[ext_resource type="Texture2D" uid="uid://cspanq6rwsv51" path="res://CHACKEN.png" id="5_pskmv"]
+[ext_resource type="AudioStream" uid="uid://btx1d8lbuis1t" path="res://punch.mp3" id="6_2i15j"]
+[ext_resource type="AudioStream" uid="uid://8ow7tefteniy" path="res://EggDeath.mp3" id="7_dohkg"]
+[ext_resource type="AudioStream" uid="uid://dhxpkhcnixwu" path="res://Chicken.mp3" id="8_lkvht"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_u1qng"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4jdkx"]
 properties/0/path = NodePath(".:player_id")
 properties/0/spawn = true
 properties/0/replication_mode = 1
@@ -35,40 +35,40 @@ properties/7/path = NodePath(".:transform")
 properties/7/spawn = true
 properties/7/replication_mode = 1
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_m3v66"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_23eb2"]
 properties/0/path = NodePath("InputSynchronizer:input_direction")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d7l2x"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vm4vs"]
 radius = 25.0
 height = 78.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cldor"]
-atlas = ExtResource("4_7slgd")
+atlas = ExtResource("4_a2mh8")
 region = Rect2(0, 0, 600, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tv4gh"]
-atlas = ExtResource("4_7slgd")
+atlas = ExtResource("4_a2mh8")
 region = Rect2(600, 0, 600, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4t1j7"]
-atlas = ExtResource("4_7slgd")
+atlas = ExtResource("4_a2mh8")
 region = Rect2(1200, 0, 600, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6h15x"]
-atlas = ExtResource("4_7slgd")
+atlas = ExtResource("4_a2mh8")
 region = Rect2(1800, 0, 600, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o2x2m"]
-atlas = ExtResource("4_7slgd")
+atlas = ExtResource("4_a2mh8")
 region = Rect2(2400, 0, 600, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hspit"]
-atlas = ExtResource("4_7slgd")
+atlas = ExtResource("4_a2mh8")
 region = Rect2(3000, 0, 600, 600)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ki4jt"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_eedey"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -94,88 +94,91 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_302sc"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_yia2v"]
 radius = 24.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gja2i"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_6u3ey"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1o16j"]
 radius = 20.025
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mm0k"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iyh1y"]
 size = Vector2(65, 47)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_d8fjd"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_aeotp"]
 radius = 27.1662
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lxvmu"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q3pd5"]
 radius = 16.0291
 height = 61.9336
 
-[node name="MultiplayerPlayer" type="CharacterBody2D"]
+[node name="EggGuyCharacter" type="CharacterBody2D"]
 collision_mask = 16
-script = ExtResource("1_vicjr")
+script = ExtResource("1_b25r6")
 
 [node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
-replication_config = SubResource("SceneReplicationConfig_u1qng")
+replication_config = SubResource("SceneReplicationConfig_4jdkx")
 
 [node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
-replication_config = SubResource("SceneReplicationConfig_m3v66")
-script = ExtResource("2_cqnm7")
+replication_config = SubResource("SceneReplicationConfig_23eb2")
+script = ExtResource("2_d8gke")
 
 [node name="EggGuySpriteSheet" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-2, 0)
-texture = ExtResource("2_ho3no")
+texture = ExtResource("3_5h5x3")
 hframes = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
-shape = SubResource("CapsuleShape2D_d7l2x")
+shape = SubResource("CapsuleShape2D_vm4vs")
 
 [node name="SuperSheet" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(-15, -216)
-sprite_frames = SubResource("SpriteFrames_ki4jt")
+sprite_frames = SubResource("SpriteFrames_eedey")
 
 [node name="Chacken" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 1
 position = Vector2(-19, -206)
-texture = ExtResource("4_gxfqc")
+texture = ExtResource("5_pskmv")
 
 [node name="Attacks" type="Area2D" parent="."]
 collision_layer = 2
 
 [node name="Neutral" type="CollisionShape2D" parent="Attacks"]
 position = Vector2(44, 5)
-shape = SubResource("CircleShape2D_302sc")
+shape = SubResource("CircleShape2D_yia2v")
 disabled = true
 
 [node name="DownAttack" type="CollisionShape2D" parent="Attacks"]
 position = Vector2(12, 44)
-shape = SubResource("CircleShape2D_302sc")
+shape = SubResource("CircleShape2D_6u3ey")
 disabled = true
 
 [node name="UpAttack" type="CollisionShape2D" parent="Attacks"]
 position = Vector2(-1, -41)
-shape = SubResource("CircleShape2D_gja2i")
+shape = SubResource("CircleShape2D_1o16j")
 disabled = true
 
 [node name="UpPower" type="CollisionShape2D" parent="Attacks"]
 position = Vector2(-4.5, -26.5)
-shape = SubResource("RectangleShape2D_2mm0k")
+shape = SubResource("RectangleShape2D_iyh1y")
 disabled = true
 
 [node name="SidePower" type="CollisionShape2D" parent="Attacks"]
 position = Vector2(37, -4)
-shape = SubResource("CircleShape2D_d8fjd")
+shape = SubResource("CircleShape2D_aeotp")
 disabled = true
 
 [node name="DownPower" type="CollisionShape2D" parent="Attacks"]
 position = Vector2(1, 41)
 rotation = -1.56128
-shape = SubResource("CapsuleShape2D_lxvmu")
+shape = SubResource("CapsuleShape2D_q3pd5")
 disabled = true
 
 [node name="ChackenCollisionPolygon2D" type="CollisionPolygon2D" parent="Attacks"]
@@ -185,10 +188,10 @@ polygon = PackedVector2Array(195, -187, 146, -138, 67, -57, -100, -55, -176, -20
 disabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_m01n1")
+stream = ExtResource("6_2i15j")
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_cwlc1")
+stream = ExtResource("7_dohkg")
 
 [node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_qpvkp")
+stream = ExtResource("8_lkvht")
