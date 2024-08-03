@@ -1,10 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2encsuvqwqhf"]
+[gd_scene load_steps=12 format=3 uid="uid://c2encsuvqwqhf"]
 
 [ext_resource type="Script" path="res://character_select.gd" id="1_egmif"]
 [ext_resource type="Texture2D" uid="uid://0q6q6k3b1rvo" path="res://eggPortraits.png" id="1_phfg1"]
 [ext_resource type="Texture2D" uid="uid://cmkbpbsofxupu" path="res://GauzyPortrait.png" id="3_1j4ui"]
 [ext_resource type="Texture2D" uid="uid://b6jovp8owbpnm" path="res://blueSelector.png" id="4_q6tsd"]
+[ext_resource type="Script" path="res://BlueSelector.gd" id="5_287bj"]
 [ext_resource type="Texture2D" uid="uid://bpoj3dklqxnfi" path="res://redSelector.png" id="5_ixjcu"]
+[ext_resource type="PackedScene" uid="uid://d2fkmsu23v0ce" path="res://Multiplayer/multiplayer_hud.tscn" id="6_qun2o"]
+[ext_resource type="Script" path="res://SelectorInputSynchronizer.gd" id="7_eenlc"]
+[ext_resource type="Script" path="res://RedSelector.gd" id="7_gjx23"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ubbb5"]
+properties/0/path = NodePath(".:index")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xe5eh"]
+properties/0/path = NodePath(".:index")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="CharacterSelect" type="Control"]
 layout_mode = 3
@@ -43,24 +63,37 @@ texture_filter = 3
 layout_mode = 2
 texture_normal = ExtResource("3_1j4ui")
 
-[node name="BlueSelector" type="TextureRect" parent="ColorRect"]
+[node name="MultiplayerHUD" parent="." instance=ExtResource("6_qun2o")]
+layout_mode = 1
+
+[node name="Selectors" type="Node" parent="."]
+
+[node name="BlueSelector" type="TextureRect" parent="Selectors"]
 unique_name_in_owner = true
 texture_filter = 1
-layout_mode = 0
 offset_left = 192.0
 offset_top = 106.0
 offset_right = 331.0
 offset_bottom = 178.0
 texture = ExtResource("4_q6tsd")
+script = ExtResource("5_287bj")
 
-[node name="RedSelector" type="TextureRect" parent="ColorRect"]
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="Selectors/BlueSelector"]
+replication_config = SubResource("SceneReplicationConfig_ubbb5")
+script = ExtResource("7_eenlc")
+
+[node name="RedSelector" type="TextureRect" parent="Selectors"]
 unique_name_in_owner = true
 texture_filter = 1
-layout_mode = 0
 offset_left = 192.0
 offset_top = 106.0
 offset_right = 331.0
 offset_bottom = 178.0
 texture = ExtResource("5_ixjcu")
+script = ExtResource("7_gjx23")
+
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="Selectors/RedSelector"]
+replication_config = SubResource("SceneReplicationConfig_xe5eh")
+script = ExtResource("7_eenlc")
 
 [connection signal="pressed" from="ColorRect/GridContainer/Gauzy" to="." method="_button_pressed"]

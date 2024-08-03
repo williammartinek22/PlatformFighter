@@ -1,9 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://qepsftoqt3mq"]
+[gd_scene load_steps=14 format=3 uid="uid://qepsftoqt3mq"]
 
 [ext_resource type="Script" path="res://main_scene.gd" id="1_0jmpr"]
 [ext_resource type="PackedScene" uid="uid://boyyfy3exqfsj" path="res://platform.tscn" id="1_keeih"]
-[ext_resource type="PackedScene" uid="uid://fr7q3plmr52c" path="res://eggGuy.tscn" id="2_kkstu"]
-[ext_resource type="PackedScene" uid="uid://d2fkmsu23v0ce" path="res://Multiplayer/multiplayer_hud.tscn" id="5_swdy0"]
 [ext_resource type="AudioStream" uid="uid://lxqe8bn32p7y" path="res://nature-ambiance.mp3" id="6_flc2a"]
 
 [sub_resource type="Gradient" id="Gradient_ijqgd"]
@@ -73,10 +71,6 @@ scale = Vector2(2.28, 1)
 position = Vector2(815, 402)
 scale = Vector2(0.720002, 1)
 
-[node name="EggGuy" parent="." node_paths=PackedStringArray("healthBar") instance=ExtResource("2_kkstu")]
-position = Vector2(227, 255)
-healthBar = NodePath("../MultiplayerSynchronizer/Health1/ProgressBar")
-
 [node name="BallWalls" type="Area2D" parent="."]
 position = Vector2(-116, -156)
 scale = Vector2(1.23041, 1.38543)
@@ -98,8 +92,6 @@ disabled = true
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="BallWalls"]
 position = Vector2(576, 634.625)
 shape = SubResource("RectangleShape2D_vh2dv")
-
-[node name="MultiplayerHUD" parent="." instance=ExtResource("5_swdy0")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://egg_guy_character.tscn", "res://Multiplayer/multiplayer_player.tscn", "res://gauzy_character.tscn")
