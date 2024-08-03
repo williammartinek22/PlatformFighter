@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2encsuvqwqhf"]
+[gd_scene load_steps=13 format=3 uid="uid://c2encsuvqwqhf"]
 
 [ext_resource type="Script" path="res://character_select.gd" id="1_egmif"]
 [ext_resource type="Texture2D" uid="uid://0q6q6k3b1rvo" path="res://eggPortraits.png" id="1_phfg1"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d2fkmsu23v0ce" path="res://Multiplayer/multiplayer_hud.tscn" id="6_qun2o"]
 [ext_resource type="Script" path="res://SelectorInputSynchronizer.gd" id="7_eenlc"]
 [ext_resource type="Script" path="res://RedSelector.gd" id="7_gjx23"]
+[ext_resource type="Script" path="res://SelectorInputSynchronizer2.gd" id="10_lyveg"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ubbb5"]
 properties/0/path = NodePath(".:index")
@@ -17,6 +18,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath("InputSynchronizer:selector_position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xe5eh"]
 properties/0/path = NodePath(".:index")
@@ -25,6 +29,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath("InputSynchronizer:selector_position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [node name="CharacterSelect" type="Control"]
 layout_mode = 3
@@ -94,6 +101,6 @@ script = ExtResource("7_gjx23")
 
 [node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="Selectors/RedSelector"]
 replication_config = SubResource("SceneReplicationConfig_xe5eh")
-script = ExtResource("7_eenlc")
+script = ExtResource("10_lyveg")
 
 [connection signal="pressed" from="ColorRect/GridContainer/Gauzy" to="." method="_button_pressed"]

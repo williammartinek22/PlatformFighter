@@ -3,18 +3,16 @@ extends MultiplayerSynchronizer
 
 @onready var player = $".."
 @onready var selector_position = player.global_position
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	if get_multiplayer_authority() != multiplayer.get_unique_id():
-		set_process(false)
-		set_physics_process(false)
+var player_index = 0
 
+func _physics_process(delta):
+	if multiplayer.get_unique_id() != 1:
+		set_process(true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if get_multiplayer_authority() != multiplayer.get_unique_id():
+	if multiplayer.get_unique_id() == 1:
 		set_process(false)
-		set_physics_process(false)
 	if Input.is_action_just_pressed("ui_left"):
 		move.rpc(player.index - 1)
 	if Input.is_action_just_pressed("ui_right"):
@@ -28,10 +26,11 @@ func _process(delta):
 	if Input.is_action_just_pressed("Z"):
 		$"../../../"._button_pressed(player, player.index)
 		
+		
 @rpc("call_local")
 func move(index):
-	if multiplayer.is_server():
-		update_position(index)
+	player_index= index
+	update_position(index)
 		
 func update_position(index):
 	var grid_container_inst = $"../../../ColorRect/GridContainer"

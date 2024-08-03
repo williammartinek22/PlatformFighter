@@ -6,7 +6,6 @@ var columns
 	set(id):
 		player_id = id
 		$InputSynchronizer.set_multiplayer_authority(id)
-		#name = str(id)
 		
 @export var index = 0
 # Called when the node enters the scene tree for the first time.
@@ -19,4 +18,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	position = $InputSynchronizer.selector_position

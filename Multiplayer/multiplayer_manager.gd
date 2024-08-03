@@ -1,7 +1,7 @@
 extends Node
 
 const SERVER_PORT = 8081
-const SERVER_IP = ""
+const SERVER_IP = "192.168.1.176"
 
 var multiplayer_scene = preload("res://gauzy_character.tscn")
 
