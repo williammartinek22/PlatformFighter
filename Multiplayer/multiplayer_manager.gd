@@ -5,18 +5,27 @@ const SERVER_IP = "192.168.1.176"
 
 var multiplayer_scene = preload("res://gauzy_character.tscn")
 
-var characterOne
-var characterTwo
+var characterOne:
+	set(character):
+		characterOne = character
+		print("CharacterOne changed to " + characterOne.get_path())
+var characterTwo:
+	set(character):
+		characterTwo = character
+		print("CharacterTwo changed to " + characterTwo.get_path())
 var selectorOne
 var selectorTwo
+var player_2_id
 
 var _players_spawn_node
+var _players_spawn_node_2
 var _multiplayer_synchronizer
 
 func become_host():
 	print("Becoming host")
 	
 	_players_spawn_node = get_tree().get_current_scene().get_node("Selectors")
+	
 	#_multiplayer_synchronizer = get_tree().get_current_scene().get_node("MultiplayerSynchronizer")
 	
 	var server_peer = ENetMultiplayerPeer.new()
@@ -49,6 +58,7 @@ func _control_selector(id: int):
 	if id == 1:
 		selectorOne.player_id = id
 	else:
+		player_2_id = id
 		selectorTwo.player_id = id
 
 func _add_player_to_game(id: int):
@@ -64,7 +74,9 @@ func _add_player_to_game(id: int):
 	player_to_add.player_id = id
 	player_to_add.name = str(id)
 	
-	_players_spawn_node.add_child(player_to_add, true)
+	_players_spawn_node_2 = get_tree().get_current_scene().get_node("Players")
+	_players_spawn_node_2.add_child(player_to_add, true)
+	_multiplayer_synchronizer = get_tree().get_current_scene().get_node("MultiplayerSynchronizer")
 	
 	if player_to_add.player_id == 1:
 		player_to_add.healthBar = _multiplayer_synchronizer.get_child(0).get_child(0)
@@ -87,3 +99,6 @@ func _remove_single_player():
 	print("Remove single player")
 	var player_to_remove = get_tree().get_current_scene().get_node("EggGuy")
 	player_to_remove.queue_free()
+
+func _load_game_scene():
+	get_tree().change_scene_to_file("res://main_scene.tscn")

@@ -5,6 +5,8 @@ extends Node2D
 func _ready():
 	%AudioStreamPlayer.play()
 	MultiplayerManager._add_player_to_game(1)
+	if MultiplayerManager.player_2_id:
+		MultiplayerManager._add_player_to_game(MultiplayerManager.player_2_id)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
