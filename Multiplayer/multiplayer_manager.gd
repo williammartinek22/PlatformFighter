@@ -9,7 +9,8 @@ var characterOne
 var characterTwo
 var selectorOne
 var selectorTwo
-var player_2_id
+var peer_id_one
+var peer_id_two
 
 var _players_spawn_node
 var _players_spawn_node_2
@@ -50,23 +51,24 @@ func join_as_player_2():
 func _control_selector(id: int):
 	if id == 1:
 		selectorOne.player_id = id
+		peer_id_one = id
 	else:
-		player_2_id = id
+		peer_id_two = id
 		selectorTwo.player_id = id
 
-func _add_player_to_game(id: int):
+func _add_player_to_game(id: int):	
 	if !multiplayer.is_server():
 		return
-	print("Added player %s to the game" % id)
-	
 	var player_to_add
 	if characterOne and id == 1:
 		player_to_add = characterOne.instantiate()
+		player_to_add.player_id = peer_id_one
 	elif characterTwo and id != 1:
 		player_to_add = characterTwo.instantiate()
+		player_to_add.player_id = peer_id_two
 	else:
 		player_to_add = multiplayer_scene.instantiate()
-	player_to_add.player_id = id
+	#player_to_add.player_id = id
 	player_to_add.name = str(id)
 	
 	_players_spawn_node_2 = get_tree().get_current_scene().get_node("Players")
@@ -82,6 +84,7 @@ func _add_player_to_game(id: int):
 		player_to_add.superBar = _multiplayer_synchronizer.get_child(3).get_child(0)
 		player_to_add.position = _multiplayer_synchronizer.get_child(4).get_child(1).position
 		player_to_add.transform.x.x = -1
+	print("Added player %s to the game" % id)
 	
 func _del_player(id: int):
 	print("Player %s left the game" % id)
@@ -97,4 +100,3 @@ func _remove_single_player():
 
 func _load_game_scene():
 	get_tree().change_scene_to_file("res://main_scene.tscn")
-	

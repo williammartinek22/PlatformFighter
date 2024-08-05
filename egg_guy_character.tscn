@@ -34,6 +34,18 @@ properties/6/replication_mode = 1
 properties/7/path = NodePath(".:transform")
 properties/7/spawn = true
 properties/7/replication_mode = 1
+properties/8/path = NodePath("Chacken:visible")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath("EggGuySpriteSheet:visible")
+properties/9/spawn = true
+properties/9/replication_mode = 1
+properties/10/path = NodePath("SuperSheet:visible")
+properties/10/spawn = true
+properties/10/replication_mode = 1
+properties/11/path = NodePath("SuperSheet:frame")
+properties/11/spawn = true
+properties/11/replication_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_23eb2"]
 properties/0/path = NodePath("InputSynchronizer:input_direction")

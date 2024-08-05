@@ -4,6 +4,9 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	%AudioStreamPlayer.play()
+	_add_players()
+	
+func _add_players():
 	MultiplayerManager._add_player_to_game(1)
 	MultiplayerManager._add_player_to_game(multiplayer.peer_connected.get_object_id())
 	
