@@ -30,7 +30,6 @@ func _process(delta):
 		move.rpc(player.index + player.columns)
 		
 	if Input.is_action_just_pressed("Z"):
-		print("OK")
 		press.rpc(player.index)
 				
 	if Input.is_action_just_pressed("X"):

@@ -5,14 +5,8 @@ const SERVER_IP = "192.168.1.176"
 
 var multiplayer_scene = preload("res://gauzy_character.tscn")
 
-var characterOne:
-	set(character):
-		characterOne = character
-		print("CharacterOne changed to " + characterOne.get_path())
-var characterTwo:
-	set(character):
-		characterTwo = character
-		print("CharacterTwo changed to " + characterTwo.get_path())
+var characterOne
+var characterTwo
 var selectorOne
 var selectorTwo
 var player_2_id
@@ -33,6 +27,7 @@ func become_host():
 	
 	multiplayer.multiplayer_peer = server_peer #establish as server
 	
+	
 	multiplayer.peer_connected.connect(_control_selector)
 	#multiplayer.peer_connected.connect(_add_player_to_game)
 	#multiplayer.peer_disconnected.connect(_del_player)
@@ -40,8 +35,7 @@ func become_host():
 	#_remove_single_player()
 	
 	if not OS.has_feature("dedicated_server"):
-		_control_selector(1)
-		#_add_player_to_game(1)
+		_control_selector(1)	
 	
 func join_as_player_2():
 	print("Joining as player 2")
@@ -54,7 +48,6 @@ func join_as_player_2():
 	_remove_single_player()
 
 func _control_selector(id: int):
-	print("Added selector %s to the game" % id)
 	if id == 1:
 		selectorOne.player_id = id
 	else:
@@ -62,6 +55,8 @@ func _control_selector(id: int):
 		selectorTwo.player_id = id
 
 func _add_player_to_game(id: int):
+	if !multiplayer.is_server():
+		return
 	print("Added player %s to the game" % id)
 	
 	var player_to_add
@@ -102,3 +97,4 @@ func _remove_single_player():
 
 func _load_game_scene():
 	get_tree().change_scene_to_file("res://main_scene.tscn")
+	

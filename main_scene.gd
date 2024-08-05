@@ -5,10 +5,8 @@ extends Node2D
 func _ready():
 	%AudioStreamPlayer.play()
 	MultiplayerManager._add_player_to_game(1)
-	if MultiplayerManager.player_2_id:
-		MultiplayerManager._add_player_to_game(MultiplayerManager.player_2_id)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	MultiplayerManager._add_player_to_game(multiplayer.peer_connected.get_object_id())
+	
 func _process(_delta):
 	if Input.is_action_just_released("R"):
 		get_tree().reload_current_scene()
