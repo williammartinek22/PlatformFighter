@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://htqyqijpd563"]
+
+[ext_resource type="Script" path="res://Explosive.gd" id="1_h6ic0"]
+[ext_resource type="Texture2D" uid="uid://bnm7dwgbqllfr" path="res://explosive.png" id="2_ai28c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lhq8k"]
+radius = 32.1403
+
+[node name="Explosive" type="CharacterBody2D"]
+collision_mask = 17
+script = ExtResource("1_h6ic0")
+
+[node name="Explosive" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_ai28c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lhq8k")

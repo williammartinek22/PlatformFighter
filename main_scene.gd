@@ -15,4 +15,5 @@ func _process(_delta):
 		get_tree().reload_current_scene()
 
 func _on_ball_walls_body_entered(body):
-	body.take_damage(100)
+	if body.has_method("take_damage"):
+		body.take_damage(100)

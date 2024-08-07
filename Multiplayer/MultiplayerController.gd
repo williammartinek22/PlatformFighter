@@ -59,7 +59,7 @@ func _apply_movement_from_input(delta):
 	if direction:
 		if frame != 1:
 			velocity.x = direction * SPEED
-			transform.x.x = direction
+			transform.x.x = direction/abs(direction + 0.00001)
 		elif frame == 1:
 			velocity.x = direction * SPEED/3
 	else:
@@ -95,7 +95,7 @@ func _physics_process(delta):
 	if direction:
 		if frame != 1:
 			velocity.x = direction * SPEED
-			transform.x.x = direction
+			transform.x.x = direction / abs(direction + 0.000001)
 
 	if not multiplayer.is_server():
 		#_apply_animations(delta)
@@ -155,7 +155,7 @@ func _on_attack_body_entered(body):
 		body.velocity += (direction * -100.0)
 		body.sender = self
 	elif not body == self and main and frame != 4:
-		body.take_damage(10)
+		body.take_damage(10)#PUT LOGIC FOR DAMAGE HERE I GUESS
 		var flingDirection = body.position.direction_to(position) * -10
 		flingDirection.x *= 250
 		#flingDirection.y *= 500 #/throwFactor

@@ -18,7 +18,9 @@ func _physics_process(delta):
 	input_direction = Input.get_axis("ui_left", "ui_right")
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_accept"):
+	#if Input.is_action_just_pressed("ui_accept"):
+		#jump.rpc()
+	if Input.is_action_just_pressed("Space"):
 		jump.rpc()
 		
 	if (Input.is_action_just_pressed("Z") or Input.is_action_pressed("C")) and player.get_node("Attacks/Neutral").disabled == true:
