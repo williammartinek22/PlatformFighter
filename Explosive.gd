@@ -6,10 +6,12 @@ var angle = 0
 var mousePos
 var bounce = false
 
+var sender
 var explosion = load("res://explosion.tscn")
 
 func _ready():
-	mousePos = get_local_mouse_position()
+	mousePos = position + Vector2(100,100)
+	mousePos.x *= dir
 	velocity = Vector2(500,-500)
 	await get_tree().create_timer(1.5).timeout
 	explode()
@@ -23,7 +25,7 @@ func _process(delta):
 	#It moves kinda weird whenever it hits something
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
-		if bounce == true:
+		if collision_info.get_collider() is MultiplayerController and collision_info.get_collider() != sender:
 			explode()
 		bounce = true
 		velocity = velocity.bounce(collision_info.get_normal())
@@ -35,5 +37,5 @@ func bust():
 func explode():
 	var explInst = explosion.instantiate()
 	explInst.global_position = global_position
-	get_tree().root.call_deferred("add_child", explInst)
+	get_tree().root.call_deferred("add_child", explInst, true)
 	queue_free()

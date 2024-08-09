@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://b182ueivb4l4h"]
+[gd_scene load_steps=32 format=3 uid="uid://b182ueivb4l4h"]
 
 [ext_resource type="Script" path="res://gauzy_character.gd" id="1_u5k6v"]
 [ext_resource type="Script" path="res://Multiplayer/MultiplayerInput.gd" id="2_byeg4"]
 [ext_resource type="PackedScene" uid="uid://htqyqijpd563" path="res://explosive.tscn" id="2_hvwkq"]
+[ext_resource type="PackedScene" uid="uid://b0weo6j262mia" path="res://crystal.tscn" id="3_5v1xp"]
 [ext_resource type="Texture2D" uid="uid://bqstdtfk2keyl" path="res://gauzySpriteSheet.png" id="3_rv78x"]
 [ext_resource type="Texture2D" uid="uid://chlpoq1tgemdi" path="res://superSheet.png" id="4_d02gi"]
 [ext_resource type="Texture2D" uid="uid://c6ynebf1hihfx" path="res://gauzySuperSpriteSheet.png" id="5_6nvri"]
@@ -173,6 +174,7 @@ size = Vector2(113, 86)
 collision_mask = 16
 script = ExtResource("1_u5k6v")
 explosive = ExtResource("2_hvwkq")
+crystal = ExtResource("3_5v1xp")
 
 [node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
@@ -188,7 +190,7 @@ texture_filter = 1
 position = Vector2(11, -4)
 texture = ExtResource("3_rv78x")
 hframes = 13
-frame = 8
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 8)
